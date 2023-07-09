@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Agdasima&display=swap');
+
+
+body {
+    background-image: url("https://i.pinimg.com/originals/24/2c/9f/242c9f3089080131ffe335600f10f005.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%; 
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Agdasima', sans-serif;
+    font-size: 20px;
+}
+
+.dropdown-menu{
+    background-color: rgb(111, 68, 68);
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    height: 200%;
+    width: 300px;
+    text-align: center;
+    opacity: 0.9;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+}
+
+li{
+    font-size: 24px;
+}
+
+.bx:hover{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.bx-lg:hover{
+    
+    cursor: pointer;
+}
+
+h1{color: rgb(248, 157, 122); 
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-size: 100px;
+}
+
+h5{
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(231, 86, 47);
+}
+
+.card-text {
+    font-size: 20px;
+}
+
+h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-title{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(231, 86, 47);
+}
+
+span{
+    font-size: 15px;
+    color: rgb(231, 86, 47); 
+}
+.btn:hover{
+    background-color: rgba(0, 0, 0, 0.204);
+    color:rgb(231, 86, 47); 
+}
+
+.card{
+    background-color: rgba(0, 0, 0, 0.51);
+    border-radius: 20px;
+    backdrop-filter: invert(1);
+}
+
+.lista{
+    width: 90%;
+    margin:auto;
+    overflow-y: hidden; 
+    overflow-x: scroll; 
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+}
+
+::-webkit-scrollbar {
+    margin-top: 2rem;
+    width: 10px; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5); 
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.7); 
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgb(93, 60, 51); 
+    border-radius: 20px;
+}
+
+.backdetails, .favorites, .heart, .details {
+    background-color: rgb(231, 86, 47); 
+    color: white;
+    font-size: 24px;
+}
+
