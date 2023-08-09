@@ -1,3 +1,4 @@
+const API_URL = "https://albertgescribano-scaling-telegram-7qgr94rrrr636pr-3000.preview.app.github.dev"
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -12,9 +13,110 @@ const getState = ({ getStore, getActions, setStore }) => {
 			oneChar: {},
 			oneVehicle: {},
 			onePlanet: {},
+			auth: false,
 
 		},
 		actions: {
+
+
+			getLogIn: async (userEmail, userPassword) => {
+				try {
+					const response = await fetch(
+						API_URL + "/login",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								email: userEmail,
+								password: userPassword,
+							}),
+						}
+					);
+
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data.access_token)
+						localStorage.setItem("myToken", data.access_token);
+						setStore({ auth: true })
+						return true;
+					} else if (response.status === 401) {
+						// Handle non-authorised connection error
+						return false;
+					}
+				} catch (err) {
+					console.log(err);
+					return false; // Handle the other errors, resend false by default
+				}
+			},
+
+			// SignUp function
+			getSignUp: async (userEmail, userPassword) => {
+				try {
+					let myToken = localStorage.getItem("myToken"); // Utiliser la clé "myToken" au lieu de "token"
+					const response = await fetch(
+						API_URL + "/signup",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${myToken}`, // Utiliser le préfixe "Bearer" pour l'autorisation
+							},
+							body: JSON.stringify({
+								email: userEmail,
+								password: userPassword,
+							}),
+						}
+					);
+
+					if (response.ok) {
+						return true
+						// console.log("Todo perfecto");
+					} else if (response.status === 401) {
+						// Gérer l'erreur de connexion non autorisée
+						return false;
+					}
+				} catch (err) {
+					console.log(err);
+					return false; // Gérer les autres erreurs, renvoyer false par défaut
+				}
+			},
+
+			getLogOut: () => {
+				localStorage.removeItem("myToken");
+				setStore({ auth: false })
+			},
+
+			isAuth: async () => {
+				try {
+					let token = localStorage.getItem("myToken");
+					console.log(token)
+					const settings = {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + token,
+						},
+					};
+
+					const request = await fetch(API_URL + "/private", settings);
+					console.log(request)
+
+					if (request.ok) {
+						const json = await request.json();
+						const data = json;
+						console.log(data)
+						setStore({ user: data.user });
+						setStore({ auth: true })
+
+					}
+
+
+				} catch (error) {
+					console.log("No se pudo cargar: ", error);
+				}
+			},
 
 			getDataPeople: async () => {
 				try {
@@ -187,7 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Esta es la info del char detail", selected);
 				setStore({ ...store, oneVehicle: selected });
 			},
-		},
+		}
 
 	}
 };
